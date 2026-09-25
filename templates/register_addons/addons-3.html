@@ -1,0 +1,129 @@
+{% extends 'navigation-footer.html' %}
+
+{% block content %}
+{% load static %}
+<div class="register-pop-up-2" id="reg-2">
+    <style>
+        .setup-later-btn{
+            background-color: white;
+            width:120px;
+            height: 45px;
+            border-radius: 17px;
+            border-width: 2px;
+            border-color: #2e73bb;
+            color: #2e73bb;
+        }
+        .setup-later-btn:hover{
+            background-color: rgba(46,115,187, 1.2);
+            color:white;
+        }
+        .setup-link:hover{
+            color:white;
+        }
+        .register-pop-up-2{
+            height: 100%;
+            width:100%;
+            background: #2e73bb;
+            position:fixed;
+            top:0;
+            left:0;
+            z-index: 1000;
+        }
+        .register-pop-up-1{
+            height: 100%;
+            width:100%;
+            background: #2e73bb;
+            position:fixed;
+            top:0;
+            left:0;
+            z-index: 1000;
+        }
+        .container-add{
+            background-color: white;
+            margin-top: 50px;
+            margin-bottom: 10px;
+            margin-left: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: 0 0 2px 2px #2e73bb;
+            border-color: blue;
+            width:700px;
+            height: 550px;
+        }
+        .container-add-1{
+            background-color: white;
+            margin-top: 200px;
+            margin-bottom: 10px;
+            margin-left: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: 0 0 2px 2px #2e73bb;
+            border-color: blue;
+            width:600px;
+            height: 300px;
+        }
+        .row-add{
+            width: 539px;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .form-group-add{
+            margin-top: 30px;
+            display: grid;
+            height: 80px;
+        }
+        .addons-input{
+            height:50px;
+            border-radius: 10px;
+            border-color: #2e73bb ;
+            box-shadow: 0 0 2px 2px #2e73bb;
+        }
+        .other-gender{
+            height:50px;
+            border-radius: 10px;
+            border-color: #2e73bb ;
+            box-shadow: 0 0 2px 2px #2e73bb;
+        }
+        .other-sexes{
+            display:none;
+            width: 100%;
+        }
+    </style>
+    <div class="container-add" id="container-add">
+        <div class="row-add">
+            <h3>Finalising</h3>
+            <p>Set a Profile Picture and Add a Bio</p>
+            <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div class="col-md-12">
+                    <div class="form-group-add">
+                        <div><h5>Add a Bio</h5></div>
+                        <input name="bio" class="addons-input" id="bio-field" type="text">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group-add">
+                        <div><h5>Select a Profile Picture</h5></div>
+                        <input type="file" name="profile-pic">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group-add">
+                        <div class="nxt-wrapper" style="width:90px;">
+                            <input type="submit" value="Next" class="btn btn-main btn-block">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

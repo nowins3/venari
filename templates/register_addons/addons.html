@@ -1,0 +1,123 @@
+{% extends 'navigation-footer.html' %}
+
+{% block content %}
+{% load static %}
+
+        <div class="register-pop-up">
+            <style>
+                .register-pop-up{
+                    height: 100%;
+                    width:100%;
+                    background: #2e73bb;
+                    position:fixed;
+                    top:0;
+                    left:0;
+                    z-index: 1000;
+                }
+                .container-add{
+                    background-color: white;
+                    margin-top: 50px;
+                    margin-bottom: 10px;
+                    margin-left: 300px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 20px;
+                    box-shadow: 0 0 2px 2px #2e73bb;
+                    border-color: blue;
+                    width:700px;
+                    height: 550px;
+                }
+                .row-add{
+                    width: 539px;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                }
+                .form-group-add{
+                    margin-top: 30px;
+                    display: grid;
+                    height: 80px;
+                }
+                .addons-input{
+                    height:50px;
+                    border-radius: 10px;
+                    border-color: #2e73bb ;
+                    box-shadow: 0 0 2px 2px #2e73bb;
+                }
+                .other-gender{
+                    height:50px;
+                    border-radius: 10px;
+                    border-color: #2e73bb ;
+                    box-shadow: 0 0 2px 2px #2e73bb;
+                }
+                .other-sexes{
+                    display:none;
+                    width: 100%;
+                }
+            </style>
+            <div class="container-add" id="container-add">
+                <div class="row-add">
+                    <h3>Finish Setting Up</h3>
+                    <p>Before you start exploring set a gender and a date of birth.</p>
+                    <form method="POST">
+                    {% csrf_token %}
+                        <div class="col-md-12">
+                            <div class="form-group-add">
+                                <div><h5>Add a Date of Birth:</h5></div>
+                                <input name="date_of_birth" class="addons-input" id="date-field" type="date">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group-add">
+                                <div><h5>Select a Gender</h5></div>
+                                <select name="gender" class="addons-input" id="gender">
+                                    <option value=""></option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Rather Not Say">Rather Not Say</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" id="other-sexes">
+                            <div class="form-group-add">
+                                    <div><h5>Specify Your Gender</h5></div>
+                                    <input class="other-gender" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group-add">
+                                <div class="nxt-wrapper" style="width:90px;">
+                                    <input type="submit" value="Next" class="btn btn-main btn-block">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                <script>
+                    var current_date = new Date();
+                    current_date = current_date.getFullYear() + "-" + ("0" + (current_date.getMonth() + 1)).slice(-2) + "-" + ("0" + current_date.getDate()).slice(-2);
+                    document.getElementById("date-field").setAttribute("value", current_date);
+                    
+                    container = document.getElementById("container-add");
+                    gender_selector = document.getElementById("gender");
+                    other_gender = document.getElementById("other-sexes");
+                    other_gender.style.display = "none";
+                    gender_selector.addEventListener("change", function(event) {
+                        if (event.target.value == "Other"){
+                            other_gender.style.display = "block";
+                            container.style.height = "600px";
+                            container.style.width = "750px";
+                        }else{
+                            other_gender.style.display = "none";
+                        }
+                    })
+                </script>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("404/", views.page_404, name="404"),
+    path("about/", views.about, name="about"),
+    path("article/", views.article, name="article"),
+    path("blog-grid-full/", views.blog_full, name="blog-grid-full"),
+    path("blog-grid/", views.blod_grid, name="blog-grid"),
+    path("blog-list", views.blog_list, name="blog-list"),
+    path("category/", views.category, name="category"),
+    path("checkout_1/", views.checkout_1, name="checkout-1"),
+    path("checkout_2/", views.checkout_2, name="checkout-2"),
+    path("checkout_3/", views.checkout_3, name="checkout-3"),
+    path("checkout_4/", views.checkout_4, name="checkout-4"),
+    path("contact/", views.contact, name="contact"),
+    path("email-receipt/", views.email_receipt, name="email-receipt"),
+    path("ideas/", views.ideas, name="ideas"),
+    path("", views.home, name="home"),
+    path("home-tabsy/", views.home_tabsy, name="home-tabsy"),
+    path("home-intro/", views.home_intro, name="home-intro"),
+    path("login/", views.login_page, name="login"),
+    path("product/<int:pak>/", views.product, name="product"),
+    path("product-grid-intro/", views.product_grid_intro, name="product-grid-intro"),
+    path("product-grid/", views.product_grid, name="product-grid"),
+    path("product-list/", views.product_list, name="product-list"),
+    path("product-topbar/", views.product_topbar, name="product-topbar"),
+    path("shortcodes/", views.shortcodes, name="shortcodes"),
+    path("addons/", views.addon, name="addon"),
+    path("addons-2/", views.addon_2, name="addon-2"),
+    path("addon-3/", views.addon_3, name="addon-3"),
+    path("add-to-cart/", views.add_to_cart, name="add-to-cart"),
+    path("update-cart/", views.update_cart, name="update-cart"),
+    path("delete-cart/", views.delete_cart, name="delete-cart")
+]

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Mobile Web-app fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Meta tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'icons/favicon.ico' %}">
+
+    <!--Title-->
+    <title>Venari</title>
+
+    <!--CSS bundle -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <link rel="stylesheet" media="all" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" media="all" href="{% static 'css/animate.css' %}" />
+    <link rel="stylesheet" media="all" href="{% static 'css/font-awesome.css' %}" />
+    <link rel="stylesheet" media="all" href="{% static 'css/linear-icons.css' %}" />
+    <link rel="stylesheet" media="all" href="{% static 'css/magnific-popup.css' %}" />
+    <link rel="stylesheet" media="all" href="{% static 'css/owl.carousel.css' %}" />
+    <link rel="stylesheet" media="all" href="{% static 'css/ion-range-slider.css' %}" />
+    <link rel="stylesheet" media="all" href="{% static 'css/theme.css' %}" />
+
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="page-loader"></div>
+
+    <div class="wrapper">
+
+        <!-- ======================== Navigation ======================== -->
+
+        <nav>
+            <style>
+                .logo-container{
+                    width: 240px;
+                    height:75px;
+                }
+            </style>
+            <div class="clearfix">
+                <a href="{% url 'home' %}" style="background-image: url(/static/assets/images/logo.png);background-size:100%;" class="logo"></a>
+                <!-- ==========  Pre navigation ========== -->
+
+                <div class="navigation navigation-pre clearfix">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="#"><i class="icon icon-heart-pulse"></i> Help center</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#"><i class="icon icon-cart"></i> Shipping & Returns</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#"><i class="icon icon-cog"></i> Gift cards</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#"><i class="icon icon-map"></i> Store locator</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========  Top navigation ========== -->
+
+                <div class="navigation navigation-top clearfix">
+                    <ul>
+                        <!--add active class for current page-->
+                        <li class="left-side"><a href="{% url 'home' %}" style="background-image: url(/static/assets/images/icon.png);background-size: 100%;height:75px;width: 100px;" class="logo-icon"></a></li>
+                        <li class="left-side"><a href="#">Man</a></li>
+                        <!--
+                            
+                            // Use active class for current state
+
+                            <li class="left-side active"><a href="#">Man</a></li>
+
+                        -->
+                        <li class="left-side"><a href="#">Woman</a></li>
+                        <li class="left-side"><a href="#">Kids</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li><a href="#">{{ request.user.username }}</a></li>
+                        {% else %}
+                            <li><a href="javascript:void(0);" class="open-login"><i class="icon icon-user"></i></a></li>
+                        {% endif %}
+                        <li><a href="javascript:void(0);" class="open-search"><i class="icon icon-magnifier"></i></a></li>
+                        <li><a href="javascript:void(0);" class="open-cart"><i class="icon icon-cart"></i> <span id="cart-qty" >{{ cart|length }}</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- ==========  Main navigation ========== -->
+
+                <div class="navigation navigation-main">
+                    <a href="#" class="open-login"><i class="icon icon-user"></i></a>
+                    <a href="#" class="open-search"><i class="icon icon-magnifier"></i></a>
+                    <a href="#" class="open-cart"><i class="icon icon-cart"></i> <span>4</span></a>
+                    <a href="#" class="open-menu"><i class="icon icon-menu"></i></a>
+                    <div class="floating-menu">
+                        <!--mobile toggle menu trigger-->
+                        <div class="close-menu-wrapper">
+                            <span class="close-menu"><i class="icon icon-cross"></i></span>
+                        </div>
+                        <ul>
+                            <li>
+                                <a href="#">Home <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul>
+                                                    <li class="label">Homepages</li>
+                                                    <li><a href="{% url 'home' %}">Home - Slider</a></li>
+                                                    <li><a href="{% url 'home-tabsy' %}">Home - Tabsy</a></li>
+                                                    <li><a href="{% url 'home-intro' %}">Home intro</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">Pages <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul>
+                                                    <li class="label">Single dropdown</li>
+                                                    <li><a href="{% url 'about' %}">About us</a></li>
+                                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                                    <li><a href="{% url '404' %}">Not found 404</a></li>
+                                                    <li><a href="{% url 'login' %}">Login & Register</a></li>
+                                                    <li><a href="{% url 'email-receipt' %}">Email - Receipt template</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">Shop <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul>
+                                                    <li class="label">Product page</li>
+                                                    <li><a href="{% url 'category' %}">Products categories</a></li>
+                                                    <li><a href="{% url 'product-grid' %}">Products grid</a></li>
+                                                    <li><a href="{% url 'product-list' %}">Products list</a></li>
+                                                    <li><a href="{% url 'product-grid-intro' %}">Products grid intro</a></li>
+                                                    <li><a href="{% url 'product-topbar' %}">Products topbar filter</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">Blog <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul>
+                                                    <li class="label">Blog pages</li>
+                                                    <li><a href="{% url 'blog-grid' %}">Blog grid</a></li>
+                                                    <li><a href="{% url 'blog-list' %}">Blog list</a></li>
+                                                    <li><a href="{% url 'blog-grid-full' %}">Blog fullpage</a></li>
+                                                    <li><a href="{% url 'ideas' %}">Blog ideas</a></li>
+                                                    <li><a href="{% url 'article' %}">Article</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">Checkout <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul>
+                                                    <li class="label">Checkout</li>
+                                                    <li><a href="{% url 'checkout-1' %}">Checkout - Cart items</a></li>
+                                                    <li><a href="{% url 'checkout-2' %}">Checkout - Delivery</a></li>
+                                                    <li><a href="{% url 'checkout-3' %}">Checkout - Payment</a></li>
+                                                    <li><a href="{% url 'checkout-4' %}">Checkout - Receipt</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="{% url 'home' %}">Boxmenu  <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown">
+                                    <div class="navbar-box">
+                                        <div class="box-lg">
+                                            <div class="box clearfix">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> Washers & Dryers</li>
+                                                            <li><a href="#">Dishwashers</a></li>
+                                                            <li><a href="#">Ovens & Ranges</a></li>
+                                                            <li><a href="#">Irons & Ironing Boards</a></li>
+                                                            <li><a href="#">Heating & Cooling</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> Kitchen Appliances</li>
+                                                            <li><a href="#">Coffee Makers</a></li>
+                                                            <li><a href="#">Microwaves</a></li>
+                                                            <li><a href="#">Blenders</a></li>
+                                                            <li><a href="#">Slow Cookers</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> Freezers</li>
+                                                            <li><a href="#">Mini Freezers</a></li>
+                                                            <li><a href="#">Ice Makers</a></li>
+                                                            <li><a href="#">Chest Freezers</a></li>
+                                                            <li><a href="#">Upright Freezers</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> TV & Video</li>
+                                                            <li><a href="#">TVs</a></li>
+                                                            <li><a href="#">DVD & Blu-ray Players</a></li>
+                                                            <li><a href="#">Home Audio & Theater</a></li>
+                                                            <li><a href="#">TVs Accessories</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> Cell phones</li>
+                                                            <li><a href="#">Straight Talk Phones</a></li>
+                                                            <li><a href="#">Unlocked Phones</a></li>
+                                                            <li><a href="#">Contract Phones</a></li>
+                                                            <li><a href="#">No-Contract Phones</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> iPad & Tablets</li>
+                                                            <li><a href="#">iPad</a></li>
+                                                            <li><a href="#">Windows Tablets</a></li>
+                                                            <li><a href="#">Android Tablets</a></li>
+                                                            <li><a href="#">Accessories</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> Computers</li>
+                                                            <li><a href="#">Laptops</a></li>
+                                                            <li><a href="#">Desktops</a></li>
+                                                            <li><a href="#">PC Gaming</a></li>
+                                                            <li><a href="#">Printers & Supplies</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> Floor Care</li>
+                                                            <li><a href="#">Upright Vacuums</a></li>
+                                                            <li><a href="#">Stick Vacuums</a></li>
+                                                            <li><a href="#">Robotic Vacuums</a></li>
+                                                            <li><a href="#">Handheld Vacuums</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <ul>
+                                                            <li class="label"><i class="icon icon-star"></i> Refrigerators</li>
+                                                            <li><a href="#">Mini Fridges</a></li>
+                                                            <li><a href="#">Kegerators</a></li>
+                                                            <li><a href="#">Beverage Refrigerators</a></li>
+                                                            <li><a href="#">Wine Refrigerators</a></li>
+                                                            <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-sm">
+                                            <div class="image">
+                                                <img src="{% static 'assets/images/menu-item-1.jpg' %}" alt="Alternate Text" />
+                                                <img src="{% static 'assets/images/menu-item-2.jpg' %}" alt="Alternate Text" />
+                                            </div>
+                                            <div class="box">
+                                                <div class="h2">Shop Electronics</div>
+                                                <div class="clearfix">
+                                                    <p>Homes that differ in terms of style, concept and architectural solutions have been furnished by Furniture Factory. These spaces tell of an international lifestyle that expresses modernity, research and a creative spirit.</p>
+                                                    <a class="btn btn-clean btn-big" href="{% url 'product-grid' %}">Shop now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a href="#">Megamenu <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <div class="row">
+                                                    <div class="clearfix">
+                                                        <div class="col-lg-3">
+                                                            <ul>
+                                                                <li class="label"><i class="icon icon-star"></i> Computers</li>
+                                                                <li><a href="#">Laptops</a></li>
+                                                                <li><a href="#">Desktops</a></li>
+                                                                <li><a href="#">PC Gaming</a></li>
+                                                                <li><a href="#">Printers & Supplies</a></li>
+                                                                <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <ul>
+                                                                <li class="label"><i class="icon icon-star"></i> Vacuums</li>
+                                                                <li><a href="#">Upright Vacuums</a></li>
+                                                                <li><a href="#">Stick Vacuums</a></li>
+                                                                <li><a href="#">Robotic Vacuums</a></li>
+                                                                <li><a href="#">Handheld Vacuums</a></li>
+                                                                <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <ul>
+                                                                <li class="label"><i class="icon icon-star"></i> Refrigerators</li>
+                                                                <li><a href="#">Mini Fridges</a></li>
+                                                                <li><a href="#">Kegerators</a></li>
+                                                                <li><a href="#">Beverage Refrigerators</a></li>
+                                                                <li><a href="#">Wine Refrigerators</a></li>
+                                                                <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <ul>
+                                                                <li class="label"><i class="icon icon-star"></i> Appliances & Accessories</li>
+                                                                <li><a href="#">Dishwasher Parts</a></li>
+                                                                <li><a href="#">Oven & Ranges Parts</a></li>
+                                                                <li><a href="#">Refrigerator & Freezer Parts</a></li>
+                                                                <li><a href="#">Washer & Dryer Parts</a></li>
+                                                                <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                        <div class="col-lg-3">
+                                                            <ul>
+                                                                <li class="label"><i class="icon icon-star"></i> Freezers</li>
+                                                                <li><a href="#">Mini Freezers</a></li>
+                                                                <li><a href="#">Ice Makers</a></li>
+                                                                <li><a href="#">Chest Freezers</a></li>
+                                                                <li><a href="#">Upright Freezers</a></li>
+                                                                <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <ul>
+                                                                <li class="label"><i class="icon icon-star"></i> TV & Video</li>
+                                                                <li><a href="#">TVs</a></li>
+                                                                <li><a href="#">DVD & Blu-ray Players</a></li>
+                                                                <li><a href="#">Home Audio & Theater</a></li>
+                                                                <li><a href="#">TVs Accessories</a></li>
+                                                                <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <ul>
+                                                                <li class="label"><i class="icon icon-star"></i> Cell phones</li>
+                                                                <li><a href="#">Straight Talk Phones</a></li>
+                                                                <li><a href="#">Unlocked Phones</a></li>
+                                                                <li><a href="#">Contract Phones</a></li>
+                                                                <li><a href="#">No-Contract Phones</a></li>
+                                                                <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <ul>
+                                                                <li class="label"><i class="icon icon-star"></i> iPad & Tablets</li>
+                                                                <li><a href="#">iPad</a></li>
+                                                                <li><a href="#">Windows Tablets</a></li>
+                                                                <li><a href="#">Android Tablets</a></li>
+                                                                <li><a href="#">Accessories</a></li>
+                                                                <li class="more"><a href="#"><i class="icon icon-chevron-right"></i> More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="{% url 'shortcodes' %}">Shortcodes</a></li>
+
+                            <li class="nav-settings">
+                                <a href="javascript:void(0);"><span class="nav-settings-value">USD</span> <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul class="nav-settings-list">
+                                                    <li><a href="javascript:void(0);">USD</a></li>
+                                                    <li><a href="javascript:void(0);">EUR</a></li>
+                                                    <li><a href="javascript:void(0);">GBP</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-settings">
+                                <a href="javascript:void(0);"><span class="nav-settings-value">ENG</span> <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul class="nav-settings-list">
+                                                    <li><a href="javascript:void(0);">ENG</a></li>
+                                                    <li><a href="javascript:void(0);">GER</a></li>
+                                                    <li><a href="javascript:void(0);">لعربية</a></li>
+                                                    <li><a href="javascript:void(0);">עִבְרִית</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ==========  Search wrapper ========== -->
+
+                <div class="search-wrapper">
+                    <form method="GET" action="{% url 'product-grid' %}">
+                        {% csrf_token %}
+                        <input name="hunt" class="form-control" placeholder="Search..." />
+                        <button type="submit" class="btn btn-main">Go!</button>
+                    </form>
+                </div>
+
+                <!-- ==========  Login wrapper ========== -->
+
+                <div class="login-wrapper">
+                    <div class="h4">Sign in</div>
+                    <form method="POST" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input name="email" type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <ul>
+                            {%  for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        <div class="form-group">
+                            <a href="#forgotpassword" class="open-popup">Forgot password?</a>
+                            <a href="{% url 'login' %}" class="open-popup">Don't have an account?</a>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-main">Submit</button>
+                    </form>
+                </div>
+
+                <!-- ==========  Cart wrapper ========== -->
+
+                <div class="cart-wrapper">
+                    <div class="checkout">
+                        <div class="clearfix">
+
+                            <!--cart item-->
+
+                            <div id="cart-container-ref" class="row">
+                            {% for product,qty in cart_products.items %}
+                                <div data-index="{{ product.product_id }}" id="{{ product.product_id }}" class="cart-block cart-block-item clearfix">
+                                    <div class="image">
+                                        <a href="{% url 'product' 1 %}"><img src="{{ product.product_img.url }}" alt="" /></a>
+                                    </div>
+                                    <div class="title">
+                                        <div><a href="{% url 'product' product.product_id %}">{{ product.product_name }}</a></div>
+                                        <small>{{ product.product_category }}</small>
+                                    </div>
+                                    <div class="quantity">
+                                        <input id="{{ product.product_id }}" type="number" value="{{ qty }}" class="form-control form-quantity" />
+                                    </div>
+                                    <div class="price">
+                                        <span class="final">{{ product.product_price }}</span>
+                                        <span class="discount">{{ product.product_previous }}</span>
+                                    </div>
+                                    <!--delete-this-item-->
+                                    <span id="cart-product-delete" data-index="{{ product.product_id }}" class="icon icon-cross icon-delete"></span>
+                                </div>
+                            {% endfor %}
+                            </div>
+
+                            <hr />
+
+                            <!--cart prices -->
+
+                            <div class="clearfix">
+                                <div class="cart-block cart-block-footer clearfix">
+                                    <div>
+                                        <strong>Discount 15%</strong>
+                                    </div>
+                                    <div>
+                                        <span>$ 159,00</span>
+                                    </div>
+                                </div>
+
+                                <div class="cart-block cart-block-footer clearfix">
+                                    <div>
+                                        <strong>Shipping</strong>
+                                    </div>
+                                    <div>
+                                        <span>$ 30,00</span>
+                                    </div>
+                                </div>
+
+                                <div class="cart-block cart-block-footer clearfix">
+                                    <div>
+                                        <strong>VAT</strong>
+                                    </div>
+                                    <div>
+                                        <span>$ 59,00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <!--cart final price -->
+
+                            <div class="clearfix">
+                                <div class="cart-block cart-block-footer clearfix">
+                                    <div>
+                                        <strong>Total</strong>
+                                    </div>
+                                    <div>
+                                        <div class="h4 title">$ 1259,00</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--cart navigation -->
+
+                            <div class="cart-block-buttons clearfix">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="{% url 'product-grid' %}" class="btn btn-clean-dark">Continue shopping</a>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <a href="{% url 'checkout-1' %}" class="btn btn-main"><span class="icon icon-cart"></span> Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        {% block content %}
+  
+
+
+        {% endblock %}
+
+        <!-- ================== Footer  ================== -->
+
+        <footer>
+            <!--footer showroom-->
+            <div class="footer-showroom hidden">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h2>Visit our showroom</h2>
+                        <p>200 12th Ave, New York, NY 10001, USA</p>
+                        <p>Mon - Sat: 10 am - 6 pm &nbsp; &nbsp; | &nbsp; &nbsp; Sun: 12pm - 2 pm</p>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <a href="#" class="btn btn-clean"><span class="icon icon-map-marker"></span> Get directions</a>
+                        <div class="call-us h4"><span class="icon icon-phone-handset"></span> 333.278.06622</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--footer links-->
+            <div class="footer-links">
+                <div class="row">
+                    <div class="col-sm-4 col-md-2">
+                        <h5>Browse by</h5>
+                        <ul>
+                            <li><a href="#">Brand</a></li>
+                            <li><a href="#">Product</a></li>
+                            <li><a href="#">Category</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">Sales</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-2">
+                        <h5>Quick links</h5>
+                        <ul>
+                            <li><a href="#">In-Store Pickup</a></li>
+                            <li><a href="#">Gift Cards</a></li>
+                            <li><a href="#">Afterpay</a></li>
+                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">Store Locator</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-2">
+                        <h5>Order info</h5>
+                        <ul>
+                            <li><a href="#">Order Status </a></li>
+                            <li><a href="#">Payments</a></li>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Returns</a></li>
+                            <li><a href="#">Exchanges</a></li>
+                            <li><a href="#">Order history</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-2">
+                        <h5>Customer service</h5>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Product Recalls</a></li>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Feedback</a></li>
+                            <li><a href="#">Store Pickup</a></li>
+                            <li><a href="#">Contact us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <h5>Sign up for our newsletter</h5>
+                        <p><i>Add your email address to sign up for our monthly emails and to receive promotional offers.</i></p>
+                        <div class="form-group form-newsletter">
+                            <input class="form-control" type="text" name="email" value="" placeholder="Email address" />
+                            <input type="submit" class="btn btn-main btn-sm" value="Subscribe" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--footer social-->
+
+            <div class="footer-social">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="#" target="_blank"><i class="fa fa-download"></i> Visit Our Shops</a> &nbsp; | &nbsp; <a href="#">Sitemap</a> &nbsp; | &nbsp; <a href="#">Privacy policy</a>
+                    </div>
+                    <div class="col-sm-6 links">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!--/wrapper-->
+
+    <!--JS files-->
+    {% csrf_token %}
+        <script>
+            jQuery.noConflict();
+            jQuery(document).ready(function () {
+                jQuery(document).on("click", '.icon-delete', (function(e){
+                    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                    var id = jQuery(this).data("index")
+                    console.log(id)
+                    jQuery.ajax({
+                        type:"POST",
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin' ,
+                        url : "{% url 'delete-cart' %}",
+                        beforeSend: function (xhr){
+                            xhr.setRequestHeader('X-CSRFToken', csrftoken )},
+                        data: {
+                            product_id : id,
+                            csrfmiddlewaretoken : csrftoken,
+                            action: 'post',
+
+                        },
+
+                        success: function(json){
+                            console.log(json);
+                            var products = document.getElementsByClassName("cart-block-item");
+                            console.log(products[0])
+                            for(let i = 0; i < products.length; i++){
+                                if (products[i].id == id){
+                                    required_idx = i;
+                                };
+                            }
+                            products[required_idx].remove();
+                            document.getElementById("cart-qty").textContent = json.Cart_Quantity- 1;
+                        },
+                    });
+                }));
+
+                jQuery(document).on("click", '.form-quantity', (function(e){
+                    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                    var id = jQuery(this).attr("id");
+                    var qty = jQuery(this).val();
+                    jQuery.ajax({
+                        type:"POST",
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin' ,
+                        url : "{% url 'update-cart' %}",
+                        beforeSend: function (xhr){
+                            xhr.setRequestHeader('X-CSRFToken', csrftoken )},
+                        data: {
+                            product_id : id,
+                            product_qty: qty,
+                            csrfmiddlewaretoken : csrftoken,
+                            action: 'post',
+
+                        },
+
+                        success: function(json){
+                            console.log(json);
+
+                        },
+                    });
+                }));
+
+                jQuery(document).on("click", '.btn-add', (function(e){
+                    var id = jQuery(this).val();
+                    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                    e.preventDefault();
+                    jQuery.ajax({
+                        type: "POST",
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin' ,
+                        url : "{% url 'add-to-cart' %}",
+                        beforeSend: function (xhr){
+                            xhr.setRequestHeader('X-CSRFToken', csrftoken )},
+                        data: {
+                            product_id : id,
+                            csrfmiddlewaretoken : csrftoken,
+                            action: 'post',
+
+                        },
+
+                        success: function(json){
+                            console.log(json);
+                            document.getElementById("cart-qty").textContent = json.Cart_Quantity;
+
+                            
+                            if(document.getElementById(json.product_id)){
+                                console.log("Exists")
+                            }
+                            else{
+                                var container = document.getElementById("cart-container-ref");
+                                var div_cart_block = document.createElement("div");
+                                div_cart_block.setAttribute("class", "cart-block cart-block-item cearfix");
+                                div_cart_block.setAttribute("id", json.product_id);
+                                div_cart_block.setAttribute("data-index", json.product_id);
+                                container.append(div_cart_block);
+
+                                var div_img = document.createElement("div");
+                                div_img.setAttribute("class", "image");
+                                div_cart_block.append(div_img);
+
+                                var a_img = document.createElement("a");
+                                var img_img = document.createElement("img");
+                                a_img_url = "{% url 'product' 1 %}".replace("1", json.product_id);
+                                a_img.setAttribute("href",a_img_url);
+                                img_img.setAttribute("src", `${json.product_img_url}`);
+                                div_img.append(a_img);
+                                a_img.append(img_img);
+
+                                var div_title = document.createElement("div");
+                                div_title.setAttribute("class", "title");
+                                div_cart_block.append(div_title);
+
+                                var div_title_sub = document.createElement("div");
+                                var a_title = document.createElement("a");
+                                var small_ttile = document.createElement("small");
+                                a_url = "{% url 'product' 1 %}".replace("1", json.product_id)
+                                a_title.setAttribute("href",a_url);
+                                a_title.innerHTML = json.product_name;
+                                small_ttile.innerHTML = json.product_category;
+                                div_title.append(div_title_sub);
+                                div_title.append(small_ttile);
+                                div_title_sub.append(a_title);
+
+                                var div_quantity = document.createElement("div");
+                                div_quantity.setAttribute("class", "quantity");
+                                div_cart_block.append(div_quantity);
+
+                                var input_quantity = document.createElement("input");
+                                input_quantity.setAttribute("id",json.product_id);
+                                input_quantity.setAttribute("type",'number');
+                                input_quantity.setAttribute("class",'form-control form-quantity');
+                                input_quantity.setAttribute("value",'1');
+                                div_quantity.append(input_quantity);
+
+                                var div_price = document.createElement("div");
+                                div_price.setAttribute("class", "price");
+                                div_cart_block.append(div_price);
+
+                                var span_final = document.createElement("span");
+                                var span_discount = document.createElement("span");
+                                span_final.setAttribute("class", "final");
+                                span_discount.setAttribute("class", "discount");
+                                span_final.innerHTML = json.product_price;
+                                span_discount.innerHTML = json.product_previous;
+                                div_price.append(span_final);
+                                div_price.append(span_discount);
+
+                                var span_delete = document.createElement("span");
+                                span_delete.setAttribute("class", "icon icon-cross icon-delete");
+                                span_delete.setAttribute("id", "cart-product-delete");
+                                span_delete.setAttribute("data-index", json.product_id);
+                                div_cart_block.append(span_delete);
+                                }
+
+                        }
+                    });
+                }));
+            });
+        </script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'js/jquery.owl.carousel.js' %}"></script>
+    <script src="{% static 'js/jquery.ion.rangeSlider.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
